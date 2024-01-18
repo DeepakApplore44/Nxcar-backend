@@ -37,7 +37,7 @@ module.exports.saveUserDetails = async (req, res) => {
     const message = `Your OTP for verification is: ${otp}`;
     await client.messages.create({
       body: message,
-      to: "91" + phoneNumber,
+      to: phoneNumber,
       from: process.env.TWILIO_PHONE_NUMBER,
     });
 
@@ -46,7 +46,7 @@ module.exports.saveUserDetails = async (req, res) => {
      */
 
     const newUser = await User.create({
-      phoneNumber: "91" + phoneNumber,
+      phoneNumber,
       name,
       email,
       vehichleNumber,
@@ -84,7 +84,7 @@ module.exports.verifyOTP = async (req, res) => {
       const message = `Your OTP for verification is: ${newOTP}`;
       await client.messages.create({
         body: message,
-        to: "91" + phoneNumber,
+        to: phoneNumber,
         from: process.env.TWILIO_PHONE_NUMBER,
       });
 
